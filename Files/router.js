@@ -21,8 +21,8 @@ router.get("/file", (req, res, next) => {
     .catch(next);
 });
 
-router.delete("/file/:id", (req, res, next) => {
-  Files.destroy({ where: { id: req.params.id } })
+router.delete("/file/:spaceId", (req, res, next) => {
+  Files.destroy({ where: { id: req.params.spaceId } })
     .then(number => res.send({ number }))
     .catch(next);
 });

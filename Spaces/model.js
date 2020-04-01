@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 const Files = require("../Files/model");
+const Recordings = require("../Recordings/model");
+const User = require("../Users/model");
 const Spaces = db.define("space", {
   name: Sequelize.STRING,
   builtIn: Sequelize.STRING,
@@ -8,4 +10,7 @@ const Spaces = db.define("space", {
   url: Sequelize.STRING
 });
 Files.belongsTo(Spaces);
+Spaces.hasOne(Files);
+Recordings.belongsTo(Spaces);
+Recordings.belongsTo(User);
 module.exports = Spaces;
