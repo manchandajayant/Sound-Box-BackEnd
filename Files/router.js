@@ -2,13 +2,19 @@ const { Router } = require("express");
 const Files = require("./model");
 const router = new Router();
 
-router.post("/file", (req, res, next) => {
-  console.log("this is a new file", req.body);
-  Files.create(req.body)
-    .then(files => res.json(files))
-    .catch(next);
-});
+router.post("/file", async (request, response, next) => {
+  try {
+    const { name, description, spaceId, location } = request.body;
 
+    const entity = { name, description, spaceId, location };
+
+    const file = await Files.create(entity);
+
+    response.send(file);
+  } catch (error) {
+    next(error);
+  }
+});
 router.get("/file", (req, res, next) => {
   //console.log("this is a get call to find all files", res.body);
   Files.findAll({
