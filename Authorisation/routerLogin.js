@@ -9,6 +9,7 @@ const router = new Router();
 router.post("/login", (request, response, next) => {
   const email = request.body.email;
   const password = request.body.password;
+  const userName = request.bod.userName;
   if (!email || !password) {
     response.status(400).send("PLease enter a valid email and password");
   } else {
