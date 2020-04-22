@@ -13,20 +13,24 @@ router.post("/login", (request, response, next) => {
     response.status(400).send("PLease enter a valid email and password");
   } else {
     User.findOne({ where: { email: request.body.email } })
-      .then(user => {
+      .then((user) => {
         if (!user) {
           response
             .status(400)
             .send({ message: "User with this email does not exist" });
         } else if (bcrypt.compareSync(request.body.password, user.password)) {
-          response.send({ id: user.id, jwt: toJWT({ userId: user.id }) });
+          response.send({
+            // id: user.id,
+            email: user.email,
+            jwt: toJWT({ userId: user.id }),
+          });
         } else {
           response.send(400).send({
-            message: "Incorrect Password"
+            message: "Incorrect Password",
           });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         response.status(500).send({ message: "Something went wrong" });
       });
@@ -35,7 +39,7 @@ router.post("/login", (request, response, next) => {
 
 router.get("/secret-endpoint", auth, (request, response, next) => {
   response.send({
-    message: `Thanks for visiting the secret endpoint,${request.user.email}`
+    message: `Thanks for visiting the secret endpoint,${request.user.email}`,
   });
 });
 
