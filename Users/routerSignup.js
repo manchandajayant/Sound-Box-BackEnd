@@ -33,4 +33,10 @@ router.get("/user/:id", (req, res, next) => {
     .catch(next);
 });
 
+router.delete("/user/:id", (req, res, next) => {
+  User.destroy({ where: { id: req.params.id } })
+    .then((use) => res.send({ use }))
+    .catch(next);
+});
+
 module.exports = router;
