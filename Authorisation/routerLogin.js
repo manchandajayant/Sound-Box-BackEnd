@@ -9,7 +9,7 @@ const router = new Router();
 router.post("/login", (request, response, next) => {
   const email = request.body.email;
   const password = request.body.password;
-  const userName = request.bod.userName;
+  const userName = request.body.userName;
   if (!email || !password) {
     response.status(400).send("PLease enter a valid email and password");
   } else {
@@ -22,7 +22,7 @@ router.post("/login", (request, response, next) => {
         } else if (bcrypt.compareSync(request.body.password, user.password)) {
           response.send({
             id: user.id,
-            userName: user.userName,
+            // userName: user.userName,
             jwt: toJWT({ userId: user.id }),
           });
         } else {
