@@ -7,8 +7,9 @@ const router = new Router();
 router.post("/signup", async (req, res, next) => {
   try {
     const user = {
+      userName: req.body.userName,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, 10)
+      password: bcrypt.hashSync(req.body.password, 10),
     };
     const userCreate = await User.create(user);
     res.send(userCreate);
@@ -19,14 +20,14 @@ router.post("/signup", async (req, res, next) => {
 
 router.get("/user", (req, res, next) => {
   User.findAll({ attributes: ["email"], raw: true })
-    .then(userlist => res.send(res.json({ userlist })))
+    .then((userlist) => res.send(res.json({ userlist })))
     .catch(next);
 });
 
 router.get("/user/:id", (req, res, next) => {
   //console.log("this is to fetch event by id");
   User.findByPk(req.params.id)
-    .then(user => {
+    .then((user) => {
       res.json(user);
     })
     .catch(next);
