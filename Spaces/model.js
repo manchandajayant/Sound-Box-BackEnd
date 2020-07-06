@@ -7,7 +7,9 @@ const Spaces = db.define("space", {
   name: Sequelize.STRING,
   builtIn: Sequelize.STRING,
   description: Sequelize.TEXT,
-  url: Sequelize.STRING
+  url: Sequelize.STRING,
+  latitude: Sequelize.FLOAT,
+  longitude: Sequelize.FLOAT,
 });
 Files.belongsTo(Spaces);
 Spaces.hasOne(Files);
