@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const { toJWT, toData } = require("./jwt");
 const User = require("../Users/model");
 const auth = require("./middleware");
-
+const cookieSession = require("cookie-session");
 const router = new Router();
 
 router.post("/login", (request, response, next) => {
@@ -20,6 +20,13 @@ router.post("/login", (request, response, next) => {
             .status(400)
             .send({ message: "User with this email does not exist" });
         } else if (bcrypt.compareSync(request.body.password, user.password)) {
+          const token = toJWT({ userId: user.id });
+          //response.cookie("token", token, { http: true });
+          response.cookie("token", token, {
+            httpOnly: true,
+
+            //secure: true,
+          });
           response.send({
             id: user.id,
             userName: user.userName,

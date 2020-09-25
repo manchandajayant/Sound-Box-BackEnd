@@ -9,12 +9,18 @@ const userRouter = require("./Users/routerSignup");
 const fileRouter = require("./Files/router");
 const recordRouter = require("./Recordings/router");
 const port = process.env.PORT || 4000;
+const passport = require("passport");
+const cookieParser = require("cookie-parser");
 
 app.use(corsMiddleWare);
 app.use(jsonParser);
+app.use(cookieParser("KEYBOARD_SECRET"));
+app.use(cors({ credentials: true }));
 app.use(spaceRouter);
 app.use(authRouter);
 app.use(userRouter);
 app.use(fileRouter);
 app.use(recordRouter);
+app.use(passport.initialize());
+app.use(passport.session());
 app.listen(port, () => console.log(`Listening on port ${port}`));
