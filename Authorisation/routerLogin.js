@@ -6,7 +6,7 @@ const auth = require("./middleware");
 
 const router = new Router();
 
-router.post("/login", (request, response, next) => {
+router.post("/login?sslmode=require", (request, response, next) => {
   const email = request.body.email;
   const password = request.body.password;
   const userName = request.body.userName;
@@ -38,7 +38,7 @@ router.post("/login", (request, response, next) => {
   }
 });
 
-router.get("/secret-endpoint", auth, (request, response, next) => {
+router.get("/secret-endpoint?sslmode=require", auth, (request, response, next) => {
   response.send({
     message: `Thanks for visiting the secret endpoint,${request.user.email}`,
   });
