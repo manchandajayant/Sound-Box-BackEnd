@@ -3,7 +3,10 @@ const databaseURL =
   process.env.DATABASE_URL ||
   "postgres://postgres:verber@127.0.0.1:5432/postgres";
 const db = new Sequelize(databaseURL, {
-  ssl: { rejectUnauthorized: false } //solved the problem with self signed sertificate
+  ssl: {
+    require: true,
+    rejectUnauthorized: false,
+  }, //solved the problem with self signed sertificate
 });
 
 db.sync()
