@@ -2,7 +2,10 @@ const Sequelize = require("sequelize");
 const databaseURL =
   process.env.DATABASE_URL ||
   "postgres://postgres:verber@127.0.0.1:5432/postgres";
-const db = new Sequelize(databaseURL);
+const db = new Sequelize(databaseURL, {
+  logging: false,
+  ssl: { rejectUnauthorized: false }, //solved the problem with self signed sertificate
+});
 
 db.sync()
   .then(() => console.log("Database is in  Sync"))
