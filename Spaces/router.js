@@ -10,7 +10,7 @@ router.post("/space", (req, res, next) => {
     .catch(next);
 });
 
-router.get("/space?sslmode=require", (req, res, next) => {
+router.get("/space", (req, res, next) => {
   //console.log("this is a get call to find all spaces", res.body);
   Spaces.findAll({
     attributes: [
@@ -30,7 +30,7 @@ router.get("/space?sslmode=require", (req, res, next) => {
     })
     .catch(next);
 });
-router.get("/space/:id?sslmode=require", (req, res, next) => {
+router.get("/space/:id", (req, res, next) => {
   //console.log("this is to fetch space by id");
   Spaces.findByPk(req.params.id, { include: Files })
     .then((space) => {
@@ -39,14 +39,14 @@ router.get("/space/:id?sslmode=require", (req, res, next) => {
     .catch(next);
 });
 
-router.put("/space/:id?sslmode=require", (req, res, next) => {
+router.put("/space/:id", (req, res, next) => {
   Spaces.findByPk(req.params.id)
     .then((spaces) => spaces.update(req.body))
     .then((spaces) => res.send(spaces))
     .catch(next);
 });
 
-router.delete("/space/:id?sslmode=require", (req, res, next) => {
+router.delete("/space/:id", (req, res, next) => {
   Spaces.destroy({ where: { id: req.params.id } })
     .then((number) => res.send({ number }))
     .catch(next);
