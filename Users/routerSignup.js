@@ -1,16 +1,17 @@
 const { Router } = require("express");
 const User = require("./model");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 
 const router = new Router();
 
 router.post("/signup", async (req, res, next) => {
   try {
     const user = {
-      userName: req.body.userName,
-      email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, 10),
+      userName: req.body.userName || "mma",
+      email: req.body.email || "3@3.com",
+      password: bcrypt.hashSync(req.body.password, 10) || "ka",
     };
+    console.log(user)
     const userCreate = await User.create(user);
     res.send(userCreate);
   } catch (error) {
@@ -25,7 +26,6 @@ router.get("/user", (req, res, next) => {
 });
 
 router.get("/user/:id", (req, res, next) => {
-  //console.log("this is to fetch event by id");
   User.findByPk(req.params.id)
     .then((user) => {
       res.json(user);
