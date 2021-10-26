@@ -27,6 +27,7 @@ router.get("/space", (req, res, next) => {
   })
     .then((spaces) => {
       res.json(spaces);
+      res.end()
     })
     .catch(next);
 });
