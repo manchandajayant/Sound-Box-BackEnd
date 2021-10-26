@@ -3,7 +3,7 @@ const databaseURL =
   process.env.DATABASE_URL ||
   "postgres://postgres:verber@127.0.0.1:5432/postgres";
 const db = new Sequelize(databaseURL);
-
+console.log(process.env.DATABASE_URL)
 db.sync()
   .then(() => console.log("Database is in  Sync"))
   .catch(console.error);
