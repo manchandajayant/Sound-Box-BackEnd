@@ -1,11 +1,15 @@
-const pg = require('pg');
-pg.defaults.ssl = true;
 const Sequelize = require("sequelize");
 const databaseURL =
   process.env.DATABASE_URL ||
   "postgres://postgres:verber@127.0.0.1:5432/postgres";
 const db = new Sequelize(databaseURL,{
-  ssl: { rejectUnauthorized: false }
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: {
+      require: true, // This will help you. But you will see nwe error
+      rejectUnauthorized: false // This line will fix new error
+    }
+  },
 });
 
 db.sync()
