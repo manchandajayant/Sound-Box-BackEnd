@@ -1,3 +1,5 @@
+const pg = require('pg');
+pg.defaults.ssl = true;
 const Sequelize = require("sequelize");
 const databaseURL =
   process.env.DATABASE_URL ||
