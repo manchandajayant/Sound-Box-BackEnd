@@ -5,7 +5,8 @@ const Files = db.define("file", {
   name: Sequelize.STRING,
   location: Sequelize.STRING,
   description: Sequelize.STRING,
-  url: Sequelize.STRING
+  url: Sequelize.STRING,
+  spaceId:Sequelize.INTEGER
 });
 
 module.exports = Files;
