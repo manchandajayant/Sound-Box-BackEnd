@@ -7,9 +7,9 @@ router.post("/file", async (request, response, next) => {
     const { name, description, spaceId, location } = request.body;
 
     const entity = { name, description, spaceId, location };
-
+    console.log("name",entity)
     const file = await Files.create(entity);
-
+    console.log("file",file)
     response.send(file);
   } catch (error) {
     next(error);

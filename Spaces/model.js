@@ -11,7 +11,7 @@ const Spaces = db.define("space", {
   latitude: Sequelize.FLOAT,
   longitude: Sequelize.FLOAT,
 });
-Files.belongsTo(Spaces);
+Files.belongsTo(Spaces,{ as: 'Spaces'});
 Spaces.hasOne(Files);
 Recordings.belongsTo(Spaces);
 Recordings.belongsTo(User);
