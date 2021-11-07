@@ -7,8 +7,9 @@ router.post("/file", async (request, response, next) => {
     const { name, description, spaceId, location } = request.body;
 
     const entity = { name, description, spaceId, location };
-    console.log("name",entity)
+
     const file = await Files.create(entity);
+
     response.send(file);
   } catch (error) {
     next(error);
@@ -17,7 +18,7 @@ router.post("/file", async (request, response, next) => {
 router.get("/file", (req, res, next) => {
   //console.log("this is a get call to find all files", res.body);
   Files.findAll({
-    attributes: ["id", "name", "location", "description"],
+    attributes: ["id", "name", "location", "description", "url"],
     raw: true
   })
     .then(files => {
