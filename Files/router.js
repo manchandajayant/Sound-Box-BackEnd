@@ -17,7 +17,7 @@ router.post("/file", async (request, response, next) => {
 router.get("/file", (req, res, next) => {
   //console.log("this is a get call to find all files", res.body);
   Files.findAll({
-    attributes: ["id", "name", "location", "description", "url"],
+    attributes: ["id", "name", "location", "description"],
     raw: true
   })
     .then(files => {
